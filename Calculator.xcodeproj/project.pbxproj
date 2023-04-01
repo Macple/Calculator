@@ -17,6 +17,7 @@
 		30B23CDE29D7962700CD18E2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30B23CDD29D7962700CD18E2 /* Preview Assets.xcassets */; };
 		30C30B3A29D8513D00BC55F3 /* Enumerations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30B3929D8513D00BC55F3 /* Enumerations.swift */; };
 		30C30B3C29D8549800BC55F3 /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30B3B29D8549800BC55F3 /* ButtonView.swift */; };
+		30C30B3E29D864BD00BC55F3 /* StringHelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C30B3D29D864BD00BC55F3 /* StringHelperFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		30B23CDD29D7962700CD18E2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		30C30B3929D8513D00BC55F3 /* Enumerations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enumerations.swift; sourceTree = "<group>"; };
 		30C30B3B29D8549800BC55F3 /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
+		30C30B3D29D864BD00BC55F3 /* StringHelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelperFunctions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 				3030A0A729D7B6AB001EC1BA /* CalcsButtonsView.swift */,
 				30C30B3929D8513D00BC55F3 /* Enumerations.swift */,
 				30C30B3B29D8549800BC55F3 /* ButtonView.swift */,
+				30C30B3D29D864BD00BC55F3 /* StringHelperFunctions.swift */,
 			);
 			path = Calculator;
 			sourceTree = "<group>";
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30C30B3E29D864BD00BC55F3 /* StringHelperFunctions.swift in Sources */,
 				30C30B3A29D8513D00BC55F3 /* Enumerations.swift in Sources */,
 				30B23CD829D7962600CD18E2 /* MainCalculatorView.swift in Sources */,
 				30C30B3C29D8549800BC55F3 /* ButtonView.swift in Sources */,
