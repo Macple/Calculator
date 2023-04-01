@@ -32,10 +32,6 @@ struct MainCalculatorView: View {
                 Spacer()
                 
                 CalcsButtonsView(currentComputation: $currentComputation, mainResult: $mainResult)
-                
-                Image(systemName: "globe")
-                    .imageScale(.large)
-                    .foregroundColor(.accentColor)
             }
         }
         .environment(\.colorScheme, lightMode ? .light : .dark)
