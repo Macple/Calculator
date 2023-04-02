@@ -30,3 +30,21 @@ func formatResult(val: Double) -> String {
         .string(
             from: NSNumber(value: val)) ?? "0"
 }
+
+/// Returns 'true' if last character of the string is a digit.
+/// Otherwise returns 'false'.
+func lastCharIsDigit(str: String) -> Bool {
+    return "0123456789".contains(getLastChar(str: str))
+}
+
+/// Returns 'true' if last character of the string is a digit or percent.
+/// Otherwise returns 'false'.
+func lastCharIsDigitOrPercent(str: String) -> Bool {
+    return "0123456789%".contains(getLastChar(str: str))
+}
+
+/// Returns 'true' if last character of the string is a operator.
+/// Otherwise returns 'false'.
+func lastCharIsOperator(str: String) -> Bool {
+    return operators.contains(getLastChar(str: str))
+}

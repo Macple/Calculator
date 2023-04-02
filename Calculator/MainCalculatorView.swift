@@ -21,7 +21,6 @@ struct MainCalculatorView: View {
                     .onTapGesture {
                         withAnimation {
                             lightMode.toggle()
-                            print(lightMode)
                         }
                     }
                 
