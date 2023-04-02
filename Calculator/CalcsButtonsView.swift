@@ -82,7 +82,6 @@ struct CalcsButtonsView: View {
             currentComputation = ""
             mainResult = "0"
         case .equal, .negative:
-            print("eq/neg")
             if !currentComputation.isEmpty {
                 if !lastCharIsOperator(str: currentComputation) {
                     let sign = calcButton == .negative ? -1.0 : 1.0
@@ -95,21 +94,35 @@ struct CalcsButtonsView: View {
                 }
             }
         case .decimal:
-            print("decimal")
+            if let lastOccurenceOfDecimal = currentComputation.lastIndex(of: ".") {
+                if lastCharIsDigit(str: currentComputation) {
+                    let startIndex = currentComputation.index(lastOccurenceOfDecimal, offsetBy: 1)
+                    let endIndex = currentComputation.endIndex
+                    let range = startIndex..<endIndex
+                    let rightSubstring = String(currentComputation[range])
+                    
+                    if Int(rightSubstring) == nil && !rightSubstring.isEmpty {
+                        currentComputation += "."
+                    }
+                }
+            } else {
+                if currentComputation.isEmpty {
+                    currentComputation += "0."
+                } else if lastCharIsDigit(str: currentComputation) {
+                    currentComputation += "."
+                }
+            }
         case .percent:
-            print("percent")
             if lastCharIsDigit(str: currentComputation) {
                 appendToCurrentComputation(calcButton: calcButton)
             }
         case .undo:
             currentComputation = String(currentComputation.dropLast())
         case .add, .subtract, .divide, .multiply:
-            print("operations")
             if lastCharIsDigitOrPercent(str: currentComputation) {
                 appendToCurrentComputation(calcButton: calcButton)
             }
         default:
-            print("digits")
             appendToCurrentComputation(calcButton: calcButton)
         }
     }
