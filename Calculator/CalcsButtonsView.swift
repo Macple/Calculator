@@ -63,6 +63,7 @@ struct CalcsButtonsView: View {
                         Button(action: {
                             // Button pressed logic
                             print("Button \(calcButtonModel.calcButton.rawValue) pressed")
+                            buttonPressed(calcButton: calcButtonModel.calcButton)
                         }, label: {
                             ButtonView(calcButton: calcButtonModel.calcButton,
                                        fgColor: calcButtonModel.color,
@@ -72,6 +73,90 @@ struct CalcsButtonsView: View {
                 }
             }
         }
+    }
+    
+    func buttonPressed(calcButton: CalcButton) {
+        // Logic
+        switch calcButton {
+        case .clear:
+            currentComputation = ""
+            mainResult = "0"
+        case .equal, .negative:
+            if !currentComputation.isEmpty {
+                if !lastCharIsOperator(str: currentComputation) {
+                    let sign = calcButton == .negative ? -1.0 : 1.0
+                    
+                    mainResult = formatResult(val: sign * calculateResults())
+                    
+                    if calcButton == .negative {
+                        currentComputation = mainResult
+                    }
+                }
+            }
+        case .decimal:
+            if let lastOccurenceOfDecimal = currentComputation.lastIndex(of: ".") {
+                if lastCharIsDigit(str: currentComputation) {
+                    let startIndex = currentComputation.index(lastOccurenceOfDecimal, offsetBy: 1)
+                    let endIndex = currentComputation.endIndex
+                    let range = startIndex..<endIndex
+                    let rightSubstring = String(currentComputation[range])
+                    
+                    if Int(rightSubstring) == nil && !rightSubstring.isEmpty {
+                        currentComputation += "."
+                    }
+                }
+            } else {
+                if currentComputation.isEmpty {
+                    currentComputation += "0."
+                } else if lastCharIsDigit(str: currentComputation) {
+                    currentComputation += "."
+                }
+            }
+        case .percent:
+            if lastCharIsDigit(str: currentComputation) {
+                appendToCurrentComputation(calcButton: calcButton)
+            }
+        case .undo:
+            currentComputation = String(currentComputation.dropLast())
+        case .add, .subtract, .divide, .multiply:
+            if lastCharIsDigitOrPercent(str: currentComputation) {
+                appendToCurrentComputation(calcButton: calcButton)
+            }
+        default:
+            appendToCurrentComputation(calcButton: calcButton)
+        }
+    }
+    
+    // Implements the actual computation
+    func calculateResults() -> Double {
+        let visibleWorkings: String = currentComputation
+        var workings = visibleWorkings.replacingOccurrences(
+            of: "%",
+            with: "*0.01")
+        workings = workings
+            .replacingOccurrences(
+                of: multiplySymbol,
+                with: "*")
+        workings = workings
+            .replacingOccurrences(
+                of: divisionSymbol,
+                with: "/")
+        
+        if getLastChar(str: visibleWorkings) == "." {
+            workings += "0"
+        }
+        
+        // Key point!
+        // Actual computation
+        let expr = NSExpression(format: workings)
+        let exprValue = expr
+            .expressionValue(with: nil, context: nil) as! Double
+        
+        return exprValue
+    }
+    
+    func appendToCurrentComputation(calcButton: CalcButton) {
+        currentComputation += calcButton.rawValue
     }
 }
 
