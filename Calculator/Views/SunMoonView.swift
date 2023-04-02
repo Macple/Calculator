@@ -16,12 +16,12 @@ struct SunMoonView: View {
                 .imageScale(.large)
                 .foregroundColor(lightMode ? sunOrMoonSelectedColor : sunOrMoonNotSelectedColor)
             
-            
-            
             Image(systemName: "moon")
                 .imageScale(.large)
                 .foregroundColor(lightMode ? sunOrMoonNotSelectedColor : sunOrMoonSelectedColor)
         }
+        .font(UIDevice.isIPad ? .title2 : .body)
+        .fontWeight(UIDevice.isIPad ? .semibold : .regular)
         .padding()
         .background(secondaryBackgroundColor)
         .cornerRadius(20)
